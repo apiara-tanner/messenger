@@ -8,27 +8,30 @@ import {
   UserOutlined,
 } from '@ant-design/icons';
 import type { MenuProps } from 'antd';
-import { Breadcrumb, Layout, Menu, Input, theme } from 'antd';
+import { Breadcrumb, Layout, Menu, Input, Button, Space, Avatar, theme } from 'antd';
+import {UserGrid, ChannelSelect} from './style.js';
 
 const { Header, Content, Footer, Sider } = Layout;
 
 type MenuItem = Required<MenuProps>['items'][number];
 
-function getItem(){
-  return "c";
-};
+function getItem(label, key, icon, children, type) {
+  return {
+    key,
+    icon,
+    children,
+    label,
+    type,
+  };
+}
 
 const items: MenuItem[] = [
-  getItem('Option 1', '1', <PieChartOutlined />),
-  getItem('Option 2', '2', <DesktopOutlined />),
-  getItem('User', 'sub1', <UserOutlined />, [
-    getItem('Tom', '3'),
-    getItem('Bill', '4'),
-    getItem('Alex', '5'),
-  ]),
-  getItem('Team', 'sub2', <TeamOutlined />, [getItem('Team 1', '6'), getItem('Team 2', '8')]),
+  getItem('Option 1', '1', <FileOutlined />),
+  getItem('Option 2', '2', <FileOutlined />),
   getItem('Files', '9', <FileOutlined />),
 ];
+
+let userAlias = "Guest";
 
 const App: React.FC = () => {
   const [collapsed, setCollapsed] = useState(false);
@@ -38,22 +41,40 @@ const App: React.FC = () => {
 
   return (
     <Layout style={{ minHeight: '100vh' }}>
-      <Sider collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}>
-        <div style={{ height: 32, margin: 16, background: 'rgba(255, 255, 255, 0.2)' }} />
-        <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline" items={items} />
+      <Sider style={{ background: '#1E1E20',
+        overflow: 'auto',
+        height: '100%',
+        position: 'fixed',
+        left: 0,
+        top: 0,
+        bottom: 0,
+      }}>
+        <img src='/apiara.png' style ={{width: '25%'}}/>
+        <Space.Compact style={{ width: '100%', padding: '5%', align: 'center' }}>
+          <Input  placeholder="Server Name" />
+          <Button type="primary">Connect</Button>
+        </Space.Compact>
+
+        <div>
+        <ChannelSelect> Channel Selection </ChannelSelect>
+        <Menu defaultSelectedKeys={['1']} mode="inline" items={items} style={{ background: '#2B2B2D', color: '#88888D', padding: '5%' }} />
+        </div>
+
+        <UserGrid>
+          <Avatar size="small" icon={<UserOutlined />} />
+          <div block style={{ margin: '0', background: '#38383A', color: 'white'}}> {userAlias} </div>
+          <Button block style={{ margin: '0', background: '#3A7EFF', color: 'white'}}> Change Alias </Button>
+        </UserGrid>
+
       </Sider>
       <Layout className="site-layout">
-        <Header style={{ padding: 0, background: colorBgContainer }} />
-        <Content style={{ margin: '0 16px' }}>
-          <Breadcrumb style={{ margin: '16px 0' }}>
-            <Breadcrumb.Item>User</Breadcrumb.Item>
-            <Breadcrumb.Item>Bill</Breadcrumb.Item>
-          </Breadcrumb>
-          <div style={{ padding: 24, minHeight: 360, background: colorBgContainer }}>
+        <Header style={{ padding: 0, background: '#1E1E20' }} />
+        <Content style={{ margin: '0', background: '#1E1E20' }}>
+          <div style={{ padding: 24, minHeight: 500, background: '#2B2B2D', color: '#88888D' }}>
             Bill is a cat.
           </div>
+
         </Content>
-        <Input />
       </Layout>
     </Layout>
   );

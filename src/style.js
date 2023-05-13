@@ -1,22 +1,14 @@
 import styled from 'styled-components';
 import {Header, Button, Card, Grid, Box, Text, Grommet, Heading, TextArea} from 'grommet';
+import {Typography } from 'antd';
 
-export const TopHeader = styled(Grommet) `
-  background: black;
-  font-size: 30px;
-  font-weight: bold;
-  padding: 1%;
-  pad: left: "medium", right: "small", vertical: "large";
-  elevation: medium;
-  color: #3A7EFF;
-  self-align: center;
+export const UserGrid = styled(Grid) `
+  display: grid;
+  grid-template-columns: 1fr 3fr 3fr;
 `
 
-export const BackGround = styled(Grommet) `
-  background: black;
-  width: 100%;
-  hight: 100%
-`
+export const ChannelSelect = styled(Typography ) `
+  font-size: 15px;
+  color: #88888D;
 
-export const BackGround = styled(Grommet) `
 `
