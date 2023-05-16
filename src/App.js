@@ -11,7 +11,7 @@ import {
 } from '@ant-design/icons';
 import type { MenuProps } from 'antd';
 import { Breadcrumb, Layout, Menu, Input, Button, Space, Avatar, theme } from 'antd';
-import {UserGrid, ChannelSelect, MenuTab} from './style.js';
+import {UserGrid, ChannelSelect, MenuTab, LogoDiv, ServerDiv, ServerButton, ServerInput, AliasButton, AliasInput} from './style.js';
 
 const { Header, Content, Footer, Sider } = Layout;
 
@@ -52,13 +52,15 @@ const App: React.FC = () => {
         top: 0,
         bottom: 0,
       }}>
-        <MenuTab>
-          <img src='/apiara.png' style ={{width: '15%'}}/>
-        </MenuTab>
-        <Space.Compact style={{ width: '100%', padding: '5%', align: 'center' }}>
-          <Input style = {{background: '#2B2B2D', color: '#88888D', border: 'none'}}/>
-          <Button type="primary">Connect</Button>
-        </Space.Compact>
+      <Space direction="vertical" size="small" style={{ display: 'flex' }}>
+
+        <LogoDiv>
+          <img src='/apiara-messenger.png' style ={{width: '95%'}}/>
+        </LogoDiv>
+        <ServerDiv>
+          <ServerInput />
+          <ServerButton>Connect</ServerButton>
+        </ServerDiv>
 
         <MenuTab>
         <ChannelSelect> Channel History </ChannelSelect>
@@ -68,11 +70,11 @@ const App: React.FC = () => {
           <UserGrid>
             <Avatar icon={<UserOutlined />} />
             <Space.Compact style={{ width: '100%', align: 'center' }}>
-              <Input style = {{background: '#38383A', color: '#3A7EFF'}}/>
-              <Button type="primary">Change Alias</Button>
+              <AliasInput />
+              <AliasButton type="primary">Change Alias</AliasButton>
             </Space.Compact>
           </UserGrid>
-
+</Space>
 
 
       </Sider>
